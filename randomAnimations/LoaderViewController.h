@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoaderViewController.h
 //  randomAnimations
 //
 //  Created by Pol Quintana on 24/10/14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LoaderViewController : UIViewController
 
 @end
-
