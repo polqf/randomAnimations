@@ -36,37 +36,41 @@
 }
 
 - (void)generateLoader {
-    
-    CGFloat diameter = 10.0;
-    CGFloat margin = 8.0;
-    NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:3];
+    self.numberOfCircles = 6;
+    self.delay = 0.5;
+    self.width = 2.0;
+    self.maxDiam = 50;
+    self.separation = 8.0;
+    self.duration = 2.0;
+    self.color = [UIColor flatCloudsColor];
     self.backgroundColor = [UIColor flatTurquoiseColor];
     
-    for (int i = 0; i< 6; i++) {
+    NSMutableArray *temp = [[NSMutableArray alloc] initWithCapacity:3];
+    
+    for (int i = 0; i< self.numberOfCircles; i++) {
         CALayer *ball = [CALayer layer];
         ball.bounds = CGRectMake(0, 0, 0 , 0);
-        ball.borderWidth = 4.0;
-        ball.borderColor = [UIColor flatCloudsColor].CGColor;
-        ball.cornerRadius = diameter/2;
+        ball.borderWidth = self.width;
+        ball.borderColor = self.color.CGColor;
         
         switch (i) {
             case 0:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 -margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 -self.separation);
                 break;
             case 1:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 - margin, CGRectGetHeight(self.frame)/2 + margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 - self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
                 break;
             case 2:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 + margin, CGRectGetHeight(self.frame)/2 + margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 + self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
                 break;
             case 3:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 -margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 -self.separation);
                 break;
             case 4:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 - margin, CGRectGetHeight(self.frame)/2 + margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 - self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
                 break;
             case 5:
-                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 + margin, CGRectGetHeight(self.frame)/2 + margin);
+                ball.position = CGPointMake(CGRectGetWidth(self.frame)/2 + self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
                 break;
         }
         
@@ -80,48 +84,61 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self startAnimation];
+    if (self.numberOfCircles > 3) {
+        [self performSelector:@selector(startSecondAnimation) withObject:self afterDelay:self.delay];
+    }
 }
 
 - (void)startAnimation {
     for (int i = 0; i<3; i++) {
         CALayer *ball = [self.balls objectAtIndex:i];
-        [self animateBall:ball atIndex:i withDelay:0];
+        [self animateBall:ball atIndex:i];
     }
 }
 
-- (void)animateBall:(CALayer *)ball atIndex:(int)index withDelay:(CGFloat)delay {
-    
-    CGFloat maxDiam = 50;
-    CGFloat duration = 2.0;
-    CGFloat margin = 8.0;
+- (void)startSecondAnimation {
+    for (int i = 3; i<6; i++) {
+        CALayer *ball = [self.balls objectAtIndex:i];
+        [self animateBall:ball atIndex:i];
+    }
+}
+
+- (void)animateBall:(CALayer *)ball atIndex:(int)index {
     
     CAKeyframeAnimation *bounds1 = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size"];
-    bounds1.duration = duration;
+    bounds1.duration = self.duration;
     bounds1.values = @[[NSValue valueWithCGSize:CGSizeMake(0, 0)],
-                           [NSValue valueWithCGSize:CGSizeMake(maxDiam, maxDiam)]];
+                           [NSValue valueWithCGSize:CGSizeMake(self.maxDiam, self.maxDiam)]];
     bounds1.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    bounds1.beginTime = CACurrentMediaTime() + delay;
     
     
     CAKeyframeAnimation *radius = [CAKeyframeAnimation animationWithKeyPath:@"cornerRadius"];
-    radius.duration = duration;
-    radius.values = @[@(0), @(maxDiam/2)];
+    radius.duration = self.duration;
+    radius.values = @[@(0), @(self.maxDiam/2)];
     radius.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    radius.beginTime = CACurrentMediaTime() + delay;
     
     
     CAKeyframeAnimation *position = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    position.duration = duration/2;
+    position.duration = self.duration/2;
     CGPoint point;
     switch (index) {
         case 0:
-            point = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 - margin);
+            point = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 - self.separation);
             break;
         case 1:
-            point = CGPointMake(CGRectGetWidth(self.frame)/2 - margin, CGRectGetHeight(self.frame)/2 + margin);
+            point = CGPointMake(CGRectGetWidth(self.frame)/2 - self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
             break;
         case 2:
-            point = CGPointMake(CGRectGetWidth(self.frame)/2 + margin, CGRectGetHeight(self.frame)/2 + margin);
+            point = CGPointMake(CGRectGetWidth(self.frame)/2 + self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
+            break;
+        case 3:
+            point = CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2 - self.separation);
+            break;
+        case 4:
+            point = CGPointMake(CGRectGetWidth(self.frame)/2 - self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
+            break;
+        case 5:
+            point = CGPointMake(CGRectGetWidth(self.frame)/2 + self.separation, CGRectGetHeight(self.frame)/2 + self.separation);
             break;
             
         default:
@@ -131,34 +148,32 @@
     position.values = @[[NSValue valueWithCGPoint:point],
                         [NSValue valueWithCGPoint:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2)]];
     position.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    position.beginTime = CACurrentMediaTime() + duration/2 + delay;
+    position.beginTime = CACurrentMediaTime() + self.duration/2;
     
     //Fade Out
     
     CAKeyframeAnimation *miniBounds = [CAKeyframeAnimation animationWithKeyPath:@"bounds.size"];
-    miniBounds.duration = duration/2;
-    miniBounds.values = @[[NSValue valueWithCGSize:CGSizeMake(maxDiam, maxDiam)],
+    miniBounds.duration = self.duration/2;
+    miniBounds.values = @[[NSValue valueWithCGSize:CGSizeMake(self.maxDiam, self.maxDiam)],
                            [NSValue valueWithCGSize:CGSizeMake(0, 0)]];
     miniBounds.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    miniBounds.beginTime = CACurrentMediaTime() + duration + delay;
-    if (index == 2) {
+    miniBounds.beginTime = CACurrentMediaTime() + self.duration;
+    if (index == self.numberOfCircles - 1) {
         miniBounds.delegate = self;
     }
     
     CAKeyframeAnimation *radius2 = [CAKeyframeAnimation animationWithKeyPath:@"cornerRadius"];
-    radius2.duration = duration/2;
-    radius2.values = @[@(maxDiam/2), @(0)];
+    radius2.duration = self.duration/2;
+    radius2.values = @[@(self.maxDiam/2), @(0)];
     radius2.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    radius2.beginTime = CACurrentMediaTime() + duration + delay;
+    radius2.beginTime = CACurrentMediaTime() + self.duration;
     
     CAKeyframeAnimation *position2 = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    position2.duration = duration/2;
+    position2.duration = self.duration/2;
     position2.values = @[[NSValue valueWithCGPoint:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2)],
                          [NSValue valueWithCGPoint:CGPointMake(CGRectGetWidth(self.frame)/2, CGRectGetHeight(self.frame)/2)]];
     position2.timingFunctions = @[[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
-    position2.beginTime = CACurrentMediaTime() + duration + delay;
-    
-    
+    position2.beginTime = CACurrentMediaTime() + self.duration;
     
     [ball addAnimation:bounds1 forKey:@"bounds1"];
     [ball addAnimation:radius forKey:@"radius"];
@@ -171,7 +186,7 @@
 }
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    [self startAnimation];
+    [self touchesBegan:nil withEvent:nil];
 }
 
 

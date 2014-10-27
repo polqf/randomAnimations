@@ -10,4 +10,12 @@
 
 @interface CircularLoader : UIView
 
+@property (nonatomic) NSInteger numberOfCircles;
+@property (nonatomic) NSTimeInterval delay;
+@property (nonatomic) CGFloat width;
+@property (nonatomic) CGFloat maxDiam;
+@property (nonatomic) CGFloat separation;
+@property (nonatomic) CGFloat duration;
+@property (nonatomic, strong) UIColor *color;
+
 @end

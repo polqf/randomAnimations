@@ -10,6 +10,7 @@
 		92ED3249033BAF02854FD016 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64987AC676BC28008B6D6117 /* libPods.a */; };
 		C1277CB119FD60600087BBFB /* MainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1277CB019FD60600087BBFB /* MainTableViewController.m */; };
 		C1277CB419FD62CA0087BBFB /* CircularLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = C1277CB319FD62CA0087BBFB /* CircularLoader.m */; };
+		C1277D0219FE509D0087BBFB /* BarsInCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = C1277D0119FE509D0087BBFB /* BarsInCircle.m */; };
 		C19CEFCC19FA9ED800A62B99 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C19CEFCB19FA9ED800A62B99 /* main.m */; };
 		C19CEFCF19FA9ED800A62B99 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C19CEFCE19FA9ED800A62B99 /* AppDelegate.m */; };
 		C19CEFD519FA9ED800A62B99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C19CEFD319FA9ED800A62B99 /* Main.storyboard */; };
@@ -38,6 +39,8 @@
 		C1277CB019FD60600087BBFB /* MainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTableViewController.m; sourceTree = "<group>"; };
 		C1277CB219FD62CA0087BBFB /* CircularLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularLoader.h; sourceTree = "<group>"; };
 		C1277CB319FD62CA0087BBFB /* CircularLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLoader.m; sourceTree = "<group>"; };
+		C1277D0019FE509D0087BBFB /* BarsInCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarsInCircle.h; sourceTree = "<group>"; };
+		C1277D0119FE509D0087BBFB /* BarsInCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarsInCircle.m; sourceTree = "<group>"; };
 		C19CEFC619FA9ED800A62B99 /* randomAnimations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = randomAnimations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19CEFCA19FA9ED800A62B99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C19CEFCB19FA9ED800A62B99 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -183,6 +186,8 @@
 				C19CEFFC19FAA32900A62B99 /* Loader.m */,
 				C1277CB219FD62CA0087BBFB /* CircularLoader.h */,
 				C1277CB319FD62CA0087BBFB /* CircularLoader.m */,
+				C1277D0019FE509D0087BBFB /* BarsInCircle.h */,
+				C1277D0119FE509D0087BBFB /* BarsInCircle.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			files = (
 				C19CEFCF19FA9ED800A62B99 /* AppDelegate.m in Sources */,
 				C19CEFFA19FAA2E200A62B99 /* RollingCube.m in Sources */,
+				C1277D0219FE509D0087BBFB /* BarsInCircle.m in Sources */,
 				C1277CB119FD60600087BBFB /* MainTableViewController.m in Sources */,
 				C19CF00019FAA71000A62B99 /* LoaderViewController.m in Sources */,
 				C19CEFFD19FAA32900A62B99 /* Loader.m in Sources */,

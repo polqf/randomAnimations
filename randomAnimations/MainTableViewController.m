@@ -11,6 +11,7 @@
 #import "Loader.h"
 #import "RollingCube.h"
 #import "CircularLoader.h"
+#import "BarsInCircle.h"
 
 @interface MainTableViewController ()
 
@@ -28,7 +29,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    self.items = @[@"Bouncing Loader",@"Square", @"Circular Loader"];
+    self.items = @[@"Bouncing Loader",@"Square", @"Circular Loader", @"BarsInCircle"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +45,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return [self.items count];
 }
@@ -108,9 +108,6 @@
     NSInteger index = [self.tableView indexPathForSelectedRow].row;
     vc.title = [self.items objectAtIndex:index];
     
-    NSLog(@"%lu", index);
-    
-    
     switch (index) {
         case 0:
             vc.view = [[Loader alloc] initWithFrame:vc.view.frame];
@@ -120,6 +117,9 @@
             break;
         case 2:
             vc.view = [[CircularLoader alloc] initWithFrame:vc.view.frame];
+            break;
+        case 3:
+            vc.view = [[BarsInCircle alloc] initWithFrame:vc.view.frame];
             break;
             
         default:
